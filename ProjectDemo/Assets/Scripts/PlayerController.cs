@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 
 	// Create public variables for player speed, and for the Text UI game objects
 	public float speed;
-	public GameObject winTextObject;
 
 	private float movementX;
 	private float movementY;
@@ -18,29 +17,57 @@ public class PlayerController : MonoBehaviour
 	private bool groundContact = true;
 
 	private Rigidbody rb;
-	private int count;
 
-	// At the start of the game..
-	void Start()
+	public TextMeshProUGUI NPCText;
+    public float timeToAppear = 3f;
+    private float timeWhenDisappear;
+    public GameObject buttonPressStandingSpot;
+
+    // At the start of the game..
+    void Start()
 	{
 		// Assign the Rigidbody component to our private rb variable
 		rb = GetComponent<Rigidbody>();
-
-		// Set the count to zero 
-		count = 0;
-
-		// Set the text property of the Win Text UI to an empty string, making the 'You Win' (game over message) blank
-		winTextObject.SetActive(false);
 	}
 
 	void Update()
     {
-		if (Input.GetKeyUp("space") && groundContact)
+        if (NPCText.enabled && (Time.time >= timeWhenDisappear))
+        {
+            NPCText.enabled = false;
+        }
+        if (Input.GetKeyUp("space") && groundContact)
 		{
 			Debug.Log("space pressed");
 			rb.AddForce(new Vector3(0f, 5f, 0f), ForceMode.Impulse);
 		}
-	}
+        // NPC interaction code
+        bool doButtonPress = false;
+
+        float buttonDistance = float.MaxValue;
+
+        if (buttonPressStandingSpot != null)
+        {
+            buttonDistance = Vector3.Distance(transform.position, buttonPressStandingSpot.transform.position);
+        }
+
+        if (Input.GetKeyUp("left ctrl"))
+        {
+            Debug.Log("distance " + buttonDistance);
+            Debug.Log("Action pressed");
+
+            if (buttonDistance <= 2f)
+            {
+                Debug.Log("Button press initiated");
+                doButtonPress = true;
+            }
+        }
+        if (doButtonPress)
+        {
+            // display the text
+            EnableText();
+        }
+    }
 
 	void FixedUpdate()
 	{
@@ -56,15 +83,7 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.CompareTag("PickUp"))
 		{
 			other.gameObject.SetActive(false);
-
-			// Add one to the score variable 'count'
-			count = count + 1;
 		}
-
-		if (count == 3)
-        {
-			winTextObject.SetActive(true);
-        }
 	}
 
 	void OnMove(InputValue value)
@@ -93,4 +112,10 @@ public class PlayerController : MonoBehaviour
 
 		}
 	}
+
+    public void EnableText()
+    {
+        NPCText.enabled = true;
+        timeWhenDisappear = Time.time + timeToAppear;
+    }
 }
