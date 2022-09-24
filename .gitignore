@@ -1,32 +1,9 @@
-# Prerequisites
-*.d
+*.DS_Store
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+/Library
 
-# Precompiled Headers
-*.gch
-*.pch
+/Temp
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+/Obj
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+/Logs
