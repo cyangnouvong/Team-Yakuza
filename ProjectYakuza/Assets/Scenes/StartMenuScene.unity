@@ -50307,7 +50307,6 @@ GameObject:
   - component: {fileID: 1884845745}
   - component: {fileID: 1892586725}
   - component: {fileID: 1885149561}
-  - component: {fileID: 1885149560}
   - component: {fileID: 1885149563}
   - component: {fileID: 1885149562}
   m_Layer: 0
@@ -50317,19 +50316,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1885149560
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885149559}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.9, z: 0.5}
-  m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!54 &1885149561
 Rigidbody:
   m_ObjectHideFlags: 0
