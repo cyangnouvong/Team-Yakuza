@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterInputController : MonoBehaviour {
+public class CharacterInputController : MonoBehaviour
+{
 
     public string Name = "George P Burdell";
 
@@ -41,10 +42,11 @@ public class CharacterInputController : MonoBehaviour {
         private set;
     }
 
-        
 
-	void Update () {
-		
+
+    void Update()
+    {
+
         //GetAxisRaw() so we can do filtering here instead of the InputManager
         float h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis
         float v = Input.GetAxisRaw("Vertical"); // setup v variables as our vertical input axis
@@ -90,10 +92,10 @@ public class CharacterInputController : MonoBehaviour {
 
 
         //do some filtering of our input as well as clamp to a speed limit
-        filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v, 
+        filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
             Time.deltaTime * forwardInputFilter), -forwardSpeedLimit, forwardSpeedLimit);
 
-        filteredTurnInput = Mathf.Lerp(filteredTurnInput, h, 
+        filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
             Time.deltaTime * turnInputFilter);
 
         Forward = filteredForwardInput;
@@ -105,5 +107,5 @@ public class CharacterInputController : MonoBehaviour {
 
         Jump = Input.GetButtonDown("Jump");
 
-	}
+    }
 }
