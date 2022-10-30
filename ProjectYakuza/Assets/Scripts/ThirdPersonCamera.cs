@@ -17,30 +17,23 @@ public class ThirdPersonCamera : MonoBehaviour
     protected Quaternion quaternionDeriv;
 
     protected float angle;
-
-    void Update()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            // https://www.youtube.com/watch?v=FIiKuP-9KuY
-            // camera view rotation by holding down right mouse button
-            transform.eulerAngles += speed * new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
-        }
-    }
-
+    
     void LateUpdate()
     {
-
         if (desiredPose != null)
         {
             transform.position = Vector3.SmoothDamp(transform.position, desiredPose.position, ref currentPositionCorrectionVelocity, positionSmoothTime, positionMaxSpeed, Time.deltaTime);
-
             var targForward = desiredPose.forward;
-            //var targForward = (target.position - this.transform.position).normalized;
-
-            transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation,
-                Quaternion.LookRotation(targForward, Vector3.up), ref quaternionDeriv, rotationSmoothTime);
-
+            if (Input.GetMouseButton(0))
+            {
+                // https://www.youtube.com/watch?v=FIiKuP-9KuY
+                // camera view rotation by holding down right mouse button
+                transform.eulerAngles += speed * new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0);
+            } else
+            {
+                transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation,
+                    Quaternion.LookRotation(targForward, Vector3.up), ref quaternionDeriv, rotationSmoothTime);
+            }
         }
     }
 }

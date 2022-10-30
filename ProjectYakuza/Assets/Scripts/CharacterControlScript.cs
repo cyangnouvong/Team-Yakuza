@@ -17,7 +17,6 @@ public class CharacterControlScript : MonoBehaviour
     public float maxTurnSpeed = 6.0f;
     int velZHash;
     int velXHash;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +25,6 @@ public class CharacterControlScript : MonoBehaviour
         velZHash = Animator.StringToHash("velz");
         velZHash = Animator.StringToHash("velx");
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -35,7 +33,6 @@ public class CharacterControlScript : MonoBehaviour
         bool backPressed = Input.GetKey(KeyCode.S);
         bool rightPressed = Input.GetKey(KeyCode.D);
         bool runPressed = Input.GetKey(KeyCode.LeftShift);
-
         if (!runPressed)
         {
             if (forwardPressed && velz < maxWalkVel)
@@ -43,76 +40,58 @@ public class CharacterControlScript : MonoBehaviour
                 velz += Time.deltaTime * acceleration;
                 velz = velz > maxWalkVel ? maxWalkVel : velz;
             }
-
             if (leftPressed && velx > minWalkVel)
             {
                 velx -= Time.deltaTime * acceleration;
                 velx = velx < minWalkVel ? minWalkVel : velx;
             }
-
             if (rightPressed && velx < maxWalkVel)
             {
                 velx += Time.deltaTime * acceleration;
                 velx = velx > maxWalkVel ? maxWalkVel : velx;
             }
-
             if (!forwardPressed && velz > 0.0f)
             {
                 velz -= Time.deltaTime * deceleration;
                 velz = velz < 0.0f ? 0.0f : velz;
                 Debug.Log(velz);
             }
-
             if (!leftPressed && velx < 0.0f)
             {
                 velx += Time.deltaTime * deceleration;
                 velx = velx > 0.0f ? 0.0f : velz;
             }
-
             if (!rightPressed && velx > 0.0f)
             {
                 velx -= Time.deltaTime * deceleration;
                 velx = velx < 0.0f ? 0.0f : velz;
             }
-
             if (!leftPressed && !rightPressed && velx != 0.0 && (velx > -0.05f && velx < 0.05f))
             {
                 velz = 0.0f;
             }
         }
-
         Debug.Log("vel z: " + velz);
         Debug.Log("vel x: " + velx);
-
         anim.SetFloat("velx", velx);
         anim.SetFloat("velz", velz);
     }
-
     void OnAnimatorMove()
     {
-
         Vector3 newRootPosition;
         Quaternion newRootRotation;
-
-
         newRootPosition = new Vector3(anim.rootPosition.x, this.transform.position.y, anim.rootPosition.z);
-
         //use rotational root motion as is
         newRootRotation = anim.rootRotation;
-
         //TODO Here, you could scale the difference in position and rotation to make the character go faster or slower
-
         newRootPosition = Vector3.LerpUnclamped(this.transform.position, newRootPosition, maxSpeed);
         newRootRotation = Quaternion.LerpUnclamped(this.transform.rotation, newRootRotation, maxTurnSpeed);
-
         // old way
         //this.transform.position = newRootPosition;
         //this.transform.rotation = newRootRotation;
-
         rbody.MovePosition(newRootPosition);
         rbody.MoveRotation(newRootRotation);
     }
-
     void OnAnimatorIK(int layerIndex)
     {
         if (anim)
