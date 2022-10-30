@@ -1,2 +1,2 @@
 # Team-Yakuza
-Pick up weapon function
+Added pick-up weapon function to shawn
