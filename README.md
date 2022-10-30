@@ -1,2 +1,2 @@
 # Team-Yakuza
-Added pick-up weapon function to shawn
+Explore the world as Knight Majima, who quests to return to his original medieval timeline!
