@@ -103,12 +103,14 @@ public class CharacterControlScript : MonoBehaviour
     }
     */
     private Animator anim;
+    private Animation animation;
     private Rigidbody rbody;
     private CharacterInputController cinput;
 
     public float animationSpeed = 1.2f;
     public float rootMovementSpeed = 15.0f;
     public float rootTurnSpeed = 20.0f;
+    private bool groundContact;
 
 
     // classic input system only polls in Update()
@@ -126,21 +128,11 @@ public class CharacterControlScript : MonoBehaviour
     public float jumpableGroundNormalMaxAngle = 45f;
     public bool closeToJumpableGround;
 
-
-    private int groundContactCount = 0;
-
-    public bool IsGrounded
-    {
-        get
-        {
-            return groundContactCount > 0;
-        }
-    }
-
     void Awake()
     {
 
         anim = GetComponent<Animator>();
+        animation = GetComponent<Animation>();
 
         if (anim == null)
             Debug.Log("Animator could not be found");
@@ -167,6 +159,42 @@ public class CharacterControlScript : MonoBehaviour
             // This makes certain that the action is handled!
             _inputActionFired = _inputActionFired || cinput.Action;
         }
+        if (Input.GetKeyUp("space") && (IsGrounded() || groundContact))
+        {
+            Debug.Log("space was pressed");
+            rbody.AddForce(new Vector3(0f, 350f, 0f), ForceMode.Impulse);
+        }
+    }
+
+   private bool IsGrounded()
+    {
+        if (Physics.Raycast(rbody.transform.position, Vector3.down, 0.2f, LayerMask.NameToLayer("Ground")))
+        {
+            Debug.Log("is ground");
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Jumpable")
+        {
+            groundContact = true;
+        }
+
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Jumpable")
+        {
+            groundContact = false;
+
+        }
     }
 
 
@@ -188,9 +216,7 @@ public class CharacterControlScript : MonoBehaviour
 
         anim.SetFloat("velx", _inputTurn);
         anim.SetFloat("velz", _inputForward);
-
         anim.speed = animationSpeed;
-
     }
 
     void OnAnimatorMove()
