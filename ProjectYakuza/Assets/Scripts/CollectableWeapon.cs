@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollectableWeapon : MonoBehaviour
 {
+    public AudioSource coin;
+
     void OnTriggerEnter(Collider c)
     {
         if (c.attachedRigidbody != null)
@@ -13,6 +15,7 @@ public class CollectableWeapon : MonoBehaviour
             {
                 //wc.ReceiveSword();
                 Destroy(this.gameObject);
+                coin.enabled = true;
             }
         }
     }

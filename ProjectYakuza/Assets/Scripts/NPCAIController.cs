@@ -35,7 +35,7 @@ public class NPCAIController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Starting patrol");
+        //Debug.Log("Starting patrol");
         m_PlayerPosition = Vector3.zero;
         m_IsPatrol = true;
         m_CaughtPlayer = false;
@@ -126,14 +126,14 @@ public class NPCAIController : MonoBehaviour
                 //  If the enemy arrives to the waypoint position then wait for a moment and go to the next
                 if (m_WaitTime <= 0)
                 {
-                    Debug.Log("To make the next move!");
+                    //Debug.Log("To make the next move!");
                     NextPoint();
                     Move(speedWalk);
                     m_WaitTime = startWaitTime;
                 }
                 else
                 {
-                    Debug.Log("Still waiting");
+                    //Debug.Log("Still waiting");
                     Stop();
                     m_WaitTime -= Time.deltaTime;
                 }
