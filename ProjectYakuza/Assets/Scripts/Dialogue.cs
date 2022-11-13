@@ -22,6 +22,10 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (index == 1)
+        {
+            ThirdPersonCamera.followPlayer = true;
+        }
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (textComponent.text == lines[index])

@@ -11,6 +11,8 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform target;
     public float speed = 0.5f;              // speed of camera rotation with right mouse button
 
+    public static bool followPlayer = false;
+
     protected Vector3 currentPositionCorrectionVelocity;
     //protected Vector3 currentFacingCorrectionVelocity;
     //protected float currentFacingAngleCorrVel;
@@ -20,7 +22,7 @@ public class ThirdPersonCamera : MonoBehaviour
     
     void LateUpdate()
     {
-        if (desiredPose != null)
+        if (desiredPose != null && followPlayer)
         {
             transform.position = Vector3.SmoothDamp(transform.position, desiredPose.position, ref currentPositionCorrectionVelocity, positionSmoothTime, positionMaxSpeed, Time.deltaTime);
             var targForward = desiredPose.forward;

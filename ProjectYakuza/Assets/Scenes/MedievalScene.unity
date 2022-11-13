@@ -17088,7 +17088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &601491627
 Transform:
   m_ObjectHideFlags: 0
@@ -19745,11 +19745,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 616710378}
   lines:
-  - Hello Player! Press Enter/Return to continue to the next dialogue.
-  - Move around the town with WASD.
+  - Hello! I am Majima. Welcome to Aincrad! Let's get started on the basics. Press
+    Enter/Return to continue to the next dialogue.
+  - Run around with WASD.
+  - Walk around with WASD while holding Left Shift.
   - Your goal is to collect your lost equipment while avoiding the knights.
   - Good luck, Majima - the witch awaits!
-  textSpeed: 0.1
+  textSpeed: 0.05
 --- !u!1001 &701236184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30726,7 +30728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1160853914
 Transform:
   m_ObjectHideFlags: 0
@@ -32246,13 +32248,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217546615}
-  m_LocalRotation: {x: 0.030843573, y: -0.7064338, z: 0.030843573, w: 0.7064338}
-  m_LocalPosition: {x: 0.5, y: 2, z: 66.5}
+  m_LocalRotation: {x: -0.049325276, y: -0.7053843, z: 0.049325276, w: -0.7053843}
+  m_LocalPosition: {x: -8, y: 2, z: 66.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 5, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 8, y: -270, z: 0}
 --- !u!1001 &1217701344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40514,7 +40516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1586356504
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40522,7 +40524,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586356503}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e70231ea715e1794bac1f11593e12014, type: 3}
@@ -44908,7 +44910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &1745002127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50718,13 +50720,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985538328}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -5}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: 2.5, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6416071014041831627}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1001 &1987052838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58015,9 +58017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21eb1b851bd47974e95b485ccd44f050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationSpeed: 1.2
-  rootMovementSpeed: 15
-  rootTurnSpeed: 20
   jumpableGroundNormalMaxAngle: 45
   closeToJumpableGround: 0
 --- !u!114 &6416071014041664273
@@ -58033,7 +58032,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Majima
-  InputMapToCircular: 1
   forwardInputFilter: 5
   turnInputFilter: 5
 --- !u!114 &6416071014041664274
@@ -58055,7 +58053,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6416071014041664269}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9b713c76b05f8b04882a23a60605b0d2, type: 3}
@@ -58151,7 +58149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6416071014041664269}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 829f99b6f00c42b47a4e72a731fb2525, type: 3}
   m_Name: 

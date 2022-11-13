@@ -5,12 +5,12 @@ using UnityEngine;
 public class CharacterInputController : MonoBehaviour
 {
 
-    public string Name = "George P Burdell";
+    public string Name = "Majima";
 
     private float filteredForwardInput = 0f;
     private float filteredTurnInput = 0f;
 
-    public bool InputMapToCircular = true;
+    private bool InputMapToCircular = true;
 
     public float forwardInputFilter = 5f;
     public float turnInputFilter = 5f;
@@ -68,35 +68,23 @@ public class CharacterInputController : MonoBehaviour
         else if (Input.GetKey(KeyCode.E))
             h = 0.5f;
 
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-            forwardSpeedLimit = 0.1f;
-        else if (Input.GetKeyUp(KeyCode.Alpha2))
-            forwardSpeedLimit = 0.2f;
-        else if (Input.GetKeyUp(KeyCode.Alpha3))
-            forwardSpeedLimit = 0.3f;
-        else if (Input.GetKeyUp(KeyCode.Alpha4))
-            forwardSpeedLimit = 0.4f;
-        else if (Input.GetKeyUp(KeyCode.Alpha5))
-            forwardSpeedLimit = 0.5f;
-        else if (Input.GetKeyUp(KeyCode.Alpha6))
-            forwardSpeedLimit = 0.6f;
-        else if (Input.GetKeyUp(KeyCode.Alpha7))
-            forwardSpeedLimit = 0.7f;
-        else if (Input.GetKeyUp(KeyCode.Alpha8))
-            forwardSpeedLimit = 0.8f;
-        else if (Input.GetKeyUp(KeyCode.Alpha9))
-            forwardSpeedLimit = 0.9f;
-        else if (Input.GetKeyUp(KeyCode.Alpha0))
-            forwardSpeedLimit = 1.0f;
-        //END ANALOG ON KEYBOARD DEMO CODE  
-
 
         //do some filtering of our input as well as clamp to a speed limit
-        filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
+            Time.deltaTime * forwardInputFilter), -0.5f, 0.5f);
+
+            filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
+                Time.deltaTime * turnInputFilter);
+        } else
+        {
+            filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
             Time.deltaTime * forwardInputFilter), -forwardSpeedLimit, forwardSpeedLimit);
 
-        filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
-            Time.deltaTime * turnInputFilter);
+            filteredTurnInput = Mathf.Lerp(filteredTurnInput, h,
+                Time.deltaTime * turnInputFilter);
+        }
 
         Forward = filteredForwardInput;
         Turn = filteredTurnInput;
