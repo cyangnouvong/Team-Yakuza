@@ -3,19 +3,17 @@ using System.Collections;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public float positionSmoothTime = 1f;		// a public variable to adjust smoothing of camera motion
-    public float rotationSmoothTime = 1f;
-    public float positionMaxSpeed = 50f;        //max speed camera can move
-    public float rotationMaxSpeed = 50f;
+    private float positionSmoothTime = 0.4f;		// a public variable to adjust smoothing of camera motion
+    private float rotationSmoothTime = 0.25f;
+    private float positionMaxSpeed = 1000;        //max speed camera can move
+    private float rotationMaxSpeed = 1000;
     public Transform desiredPose;			// the desired pose for the camera, specified by a transform in the game
     public Transform target;
-    public float speed = 0.5f;              // speed of camera rotation with right mouse button
+    private float speed = 0.8f;              // speed of camera rotation with right mouse button
 
     public static bool followPlayer = false;
 
     protected Vector3 currentPositionCorrectionVelocity;
-    //protected Vector3 currentFacingCorrectionVelocity;
-    //protected float currentFacingAngleCorrVel;
     protected Quaternion quaternionDeriv;
 
     protected float angle;
@@ -26,7 +24,7 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             transform.position = Vector3.SmoothDamp(transform.position, desiredPose.position, ref currentPositionCorrectionVelocity, positionSmoothTime, positionMaxSpeed, Time.deltaTime);
             var targForward = desiredPose.forward;
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(1))
             {
                 // https://www.youtube.com/watch?v=FIiKuP-9KuY
                 // camera view rotation by holding down right mouse button

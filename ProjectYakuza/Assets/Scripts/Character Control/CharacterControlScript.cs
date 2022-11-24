@@ -22,6 +22,8 @@ public class CharacterControlScript : MonoBehaviour
     private float rootMovementSpeed;
     private float rootTurnSpeed;
 
+    public static bool freezeCharacter = true;
+
     public GameObject townGate;
     public GameObject interactTextBox;
     public GameObject interactText;
@@ -83,7 +85,6 @@ public class CharacterControlScript : MonoBehaviour
             _inputActionFired = _inputActionFired || cinput.Action;
 
         }
-
         bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
         if (Input.GetKeyUp(KeyCode.Space) && isGrounded)
         {
@@ -95,8 +96,6 @@ public class CharacterControlScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
-
         float townGateDistance = -1.0f;
         if (townGate != null)
         {
@@ -107,15 +106,46 @@ public class CharacterControlScript : MonoBehaviour
         {
             interactText.SetActive(true);
             interactTextBox.SetActive(true);
-        } else
+        }
+        else
         {
             interactText.SetActive(false);
             interactTextBox.SetActive(false);
         }
 
-        anim.SetFloat("velx", _inputTurn);
-        anim.SetFloat("vely", _inputForward);
-        Debug.Log(anim.GetFloat("vely"));
+        bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
+
+        if (freezeCharacter)
+        {
+            anim.SetFloat("velx", 0);
+            anim.SetFloat("vely", 0);
+        }
+        else
+        {
+            anim.SetFloat("velx", _inputTurn);
+            anim.SetFloat("vely", _inputForward);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.transform.gameObject.tag == "ground")
+        {
+
+            ++groundContactCount;
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+
+        if (collision.transform.gameObject.tag == "ground")
+        {
+            --groundContactCount;
+        }
+
     }
 
     void OnAnimatorMove()
@@ -143,25 +173,21 @@ public class CharacterControlScript : MonoBehaviour
         //TODO Here, you could scale the difference in position and rotation to make the character go faster or slower
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            //rootMovementSpeed = 1.5f;
-            rootMovementSpeed = 5f;
+            rootMovementSpeed = 0.9f;
         }
         else
         {
-            //rootMovementSpeed = 1.9f;
-            rootMovementSpeed = 6.5f;
+            rootMovementSpeed = 1.5f;
         }
         newRootPosition = Vector3.LerpUnclamped(this.transform.position, newRootPosition, rootMovementSpeed);
 
         if (anim.GetFloat("vely") < 0.05f)
         {
-            //rootTurnSpeed = 1.0f;
-            rootTurnSpeed = 1.3f;
+            rootTurnSpeed = 0.5f;
         }
         else
         {
-            //rootTurnSpeed = 2.5f;
-            rootTurnSpeed = 3.5f;
+            rootTurnSpeed = 1.2f;
         }
         newRootRotation = Quaternion.LerpUnclamped(this.transform.rotation, newRootRotation, rootTurnSpeed);
 

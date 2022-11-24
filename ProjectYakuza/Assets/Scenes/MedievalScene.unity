@@ -20969,6 +20969,7 @@ MonoBehaviour:
   - Run around with WASD.
   - Walk around with WASD while holding LEFT SHIFT.
   - Press SPACE to jump.
+  - RIght click and drag your mouse to look around.
   - You are now ready to set off on your adventure.
   - Go through the town gate and head to the church!
   textSpeed: 0.03
@@ -21819,6 +21820,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 496004, guid: 0a5ef1aaf47f03547983772b8f1f3a80, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64530828098117622, guid: 0a5ef1aaf47f03547983772b8f1f3a80, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64530828098117622, guid: 0a5ef1aaf47f03547983772b8f1f3a80, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -35168,13 +35177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb55de9a8e20224ebf4eb96c8831283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionSmoothTime: 0.5
-  rotationSmoothTime: 0.25
-  positionMaxSpeed: 1000
-  rotationMaxSpeed: 1000
   desiredPose: {fileID: 1985538329}
   target: {fileID: 6416071014041831627}
-  speed: 0.5
 --- !u!81 &1217546618
 AudioListener:
   m_ObjectHideFlags: 0
@@ -51301,7 +51305,7 @@ Transform:
   m_Children:
   - {fileID: 1477639325}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1798423430
 PrefabInstance:
@@ -56197,13 +56201,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985538328}
-  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: 0, y: 2.5, z: -6}
+  m_LocalRotation: {x: 0.052335896, y: 0, z: 0, w: 0.9986295}
+  m_LocalPosition: {x: 0, y: 2.5, z: -5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6416071014041831627}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6, y: 0, z: 0}
 --- !u!1001 &1987052838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59339,7 +59343,7 @@ Transform:
   - {fileID: 572540216}
   - {fileID: 51532622}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2098125777
 PrefabInstance:
@@ -63036,7 +63040,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
   m_Controller: {fileID: 9100000, guid: 9a0a13407ceac9c4ba1e09adbb38ddd0, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -63890,7 +63894,6 @@ MonoBehaviour:
   interactTextBox: {fileID: 1346238614}
   interactText: {fileID: 303301859}
   jumpableGroundNormalMaxAngle: 45
-  closeToJumpableGround: 0
 --- !u!114 &6416071014041664273
 MonoBehaviour:
   m_ObjectHideFlags: 0

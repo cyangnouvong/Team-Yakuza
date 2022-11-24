@@ -14,6 +14,7 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CharacterControlScript.freezeCharacter = true;
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -64,6 +65,7 @@ public class Dialogue : MonoBehaviour
         } else
         {
             gameObject.SetActive(false);
+            CharacterControlScript.freezeCharacter = false;
         }
     }
 }
