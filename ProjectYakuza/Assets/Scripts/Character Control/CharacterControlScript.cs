@@ -27,6 +27,9 @@ public class CharacterControlScript : MonoBehaviour
     public GameObject townGate;
     public GameObject interactTextBox;
     public GameObject interactText;
+    private bool nearTownGate = false;
+
+    public GameObject teleportPoint;
 
     // classic input system only polls in Update()
     // so must treat input events like discrete button presses as
@@ -106,11 +109,13 @@ public class CharacterControlScript : MonoBehaviour
         {
             interactText.SetActive(true);
             interactTextBox.SetActive(true);
+            nearTownGate = true;
         }
         else
         {
             interactText.SetActive(false);
             interactTextBox.SetActive(false);
+            nearTownGate = false;
         }
 
         bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
@@ -179,6 +184,7 @@ public class CharacterControlScript : MonoBehaviour
         {
             rootMovementSpeed = 1.5f;
         }
+
         newRootPosition = Vector3.LerpUnclamped(this.transform.position, newRootPosition, rootMovementSpeed);
 
         if (anim.GetFloat("vely") < 0.05f)
@@ -197,6 +203,12 @@ public class CharacterControlScript : MonoBehaviour
 
         rbody.MovePosition(newRootPosition);
         rbody.MoveRotation(newRootRotation);
+
+        if (Input.GetKey(KeyCode.E) && nearTownGate)
+        {
+            // teleport
+            rbody.MovePosition(teleportPoint.transform.position);
+        }
     }
 
     void OnAnimatorIK(int layerIndex)
