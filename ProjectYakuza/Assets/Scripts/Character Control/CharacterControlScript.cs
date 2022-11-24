@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,6 +31,7 @@ public class CharacterControlScript : MonoBehaviour
     private bool nearTownGate = false;
 
     public GameObject teleportPoint;
+    public GameObject churchSceneTeleportPoint;
 
     // classic input system only polls in Update()
     // so must treat input events like discrete button presses as
@@ -116,6 +118,17 @@ public class CharacterControlScript : MonoBehaviour
             interactText.SetActive(false);
             interactTextBox.SetActive(false);
             nearTownGate = false;
+        }
+
+        float churchSceneDistance = -1.0f;
+        if (churchSceneTeleportPoint != null)
+        {
+            churchSceneDistance = Vector3.Distance(transform.position, churchSceneTeleportPoint.transform.position);
+        }
+
+        if (churchSceneDistance != -1 && churchSceneDistance < 2.0f)
+        {
+            SceneManager.LoadScene("ChurchScene");
         }
 
         bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);

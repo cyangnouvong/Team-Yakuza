@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MedievalScene.unity
     guid: eb2364c8ec9ecc74fa6b2504dafc2911
+  - enabled: 1
+    path: Assets/Scenes/ChurchScene.unity
+    guid: ed4e212d7d913b84e9643c87104618a2
   m_configObjects: {}

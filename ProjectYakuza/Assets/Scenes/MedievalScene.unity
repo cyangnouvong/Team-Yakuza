@@ -21032,7 +21032,7 @@ GameObject:
   - component: {fileID: 703665064}
   - component: {fileID: 703665063}
   m_Layer: 0
-  m_Name: TeleportPoint (1)
+  m_Name: ChurchTeleportPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64084,6 +64084,7 @@ MonoBehaviour:
   interactTextBox: {fileID: 1346238614}
   interactText: {fileID: 303301859}
   teleportPoint: {fileID: 1380655814}
+  churchSceneTeleportPoint: {fileID: 703665062}
   jumpableGroundNormalMaxAngle: 45
 --- !u!114 &6416071014041664273
 MonoBehaviour:
