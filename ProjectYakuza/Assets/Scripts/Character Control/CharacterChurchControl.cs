@@ -21,21 +21,25 @@ public class CharacterChurchControl : MonoBehaviour
     {
         anim.SetBool("isThumbsUp", false);
         anim.SetBool("isStretching", false);
+
         if (Dialogue.index != prevIndex && Dialogue.index == 2)
         {
             anim.SetBool("isThumbsUp", true);
+            anim.Play("Base Layer.Thumbs Up", 0, 0);
             prevIndex += 2;
         }
 
         if(Dialogue.index != prevIndex && Dialogue.index == 4)
         {
             anim.SetBool("isStretching", true);
+            anim.Play("Base Layer.Arm Stretching", 0, 0);
             prevIndex += 2;
         }
 
         if (Dialogue.index != prevIndex && Dialogue.index == 6)
         {
             anim.SetBool("isLooking", true);
+            anim.Play("Base Layer.Look Around", 0, 0);
             prevIndex += 2;
         }
     }

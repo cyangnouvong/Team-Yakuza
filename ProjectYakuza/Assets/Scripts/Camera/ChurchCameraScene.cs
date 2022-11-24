@@ -34,7 +34,7 @@ public class ChurchCameraScene : MonoBehaviour
         {
             if (moveCamera)
             {
-                transform.position = new Vector3(17, 6, -16);
+                transform.position = new Vector3(16.3f, 6, -17);
                 transform.rotation = Quaternion.Euler(13, -30, 0);
                 moveCamera = false;
             }
