@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/MedievalScene.unity
+- path: Assets/Scenes/ChurchScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
