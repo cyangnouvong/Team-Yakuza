@@ -9,12 +9,12 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
-
     private int index;
 
     // Start is called before the first frame update
     void Start()
     {
+        CharacterControlScript.freezeCharacter = true;
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -22,6 +22,10 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (index == 1)
+        {
+            ThirdPersonCamera.followPlayer = true;
+        }
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (textComponent.text == lines[index])
@@ -61,6 +65,7 @@ public class Dialogue : MonoBehaviour
         } else
         {
             gameObject.SetActive(false);
+            CharacterControlScript.freezeCharacter = false;
         }
     }
 }

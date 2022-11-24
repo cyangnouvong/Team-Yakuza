@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
   - Jumpable
+  - Barrier
+  - ground
   layers:
   - Default
   - TransparentFX
