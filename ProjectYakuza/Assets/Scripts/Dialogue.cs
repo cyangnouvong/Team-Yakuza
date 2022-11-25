@@ -9,12 +9,11 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
-    private int index;
+    public static int index = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        CharacterControlScript.freezeCharacter = true;
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -64,8 +63,9 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(TypeLine());
         } else
         {
+            index++;
             gameObject.SetActive(false);
-            CharacterControlScript.freezeCharacter = false;
         }
+        Debug.Log(index);
     }
 }
