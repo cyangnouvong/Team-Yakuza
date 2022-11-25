@@ -16,22 +16,9 @@ public class CharacterControlScript : MonoBehaviour
     private Rigidbody rbody;
     private CharacterInputController cinput;
 
-    private Transform leftFoot;
-    private Transform rightFoot;
-
     // new variables added below:
     private float rootMovementSpeed;
     private float rootTurnSpeed;
-
-    public static bool freezeCharacter = true;
-
-    public GameObject townGate;
-    public GameObject interactTextBox;
-    public GameObject interactText;
-    private bool nearTownGate = false;
-
-    public GameObject teleportPoint;
-    public GameObject churchSceneTeleportPoint;
 
     // classic input system only polls in Update()
     // so must treat input events like discrete button presses as
@@ -101,48 +88,10 @@ public class CharacterControlScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        float townGateDistance = -1.0f;
-        if (townGate != null)
-        {
-            townGateDistance = Vector3.Distance(transform.position, townGate.transform.position);
-        }
-
-        if (townGateDistance != -1 && townGateDistance < 3.0f)
-        {
-            interactText.SetActive(true);
-            interactTextBox.SetActive(true);
-            nearTownGate = true;
-        }
-        else
-        {
-            interactText.SetActive(false);
-            interactTextBox.SetActive(false);
-            nearTownGate = false;
-        }
-
-        float churchSceneDistance = -1.0f;
-        if (churchSceneTeleportPoint != null)
-        {
-            churchSceneDistance = Vector3.Distance(transform.position, churchSceneTeleportPoint.transform.position);
-        }
-
-        if (churchSceneDistance != -1 && churchSceneDistance < 2.0f)
-        {
-            SceneManager.LoadScene("ChurchScene");
-        }
-
         bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
-        if (freezeCharacter)
-        {
-            anim.SetFloat("velx", 0);
-            anim.SetFloat("vely", 0);
-        }
-        else
-        {
-            anim.SetFloat("velx", _inputTurn);
-            anim.SetFloat("vely", _inputForward);
-        }
+        anim.SetFloat("velx", _inputTurn);
+        anim.SetFloat("vely", _inputForward);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -216,12 +165,6 @@ public class CharacterControlScript : MonoBehaviour
 
         rbody.MovePosition(newRootPosition);
         rbody.MoveRotation(newRootRotation);
-
-        if (Input.GetKey(KeyCode.E) && nearTownGate)
-        {
-            // teleport
-            rbody.MovePosition(teleportPoint.transform.position);
-        }
     }
 
     void OnAnimatorIK(int layerIndex)

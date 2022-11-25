@@ -22,6 +22,7 @@ public class SorcererControl : MonoBehaviour
         anim.SetBool("isPointing", false);
         anim.SetBool("isAngry", false);
         anim.SetBool("isCharge", false);
+        anim.SetBool("isPlotting", false);
 
         if (Dialogue.index != prevIndex && Dialogue.index == 1)
         {
@@ -40,6 +41,12 @@ public class SorcererControl : MonoBehaviour
             anim.SetBool("isCharge", true);
             anim.Play("Base Layer.Charge", 0, 0);
             prevIndex += 3;
+        }
+        if (Dialogue.index != prevIndex && Dialogue.index == 7)
+        {
+            anim.SetBool("isPlotting", true);
+            anim.Play("Base Layer.Plotting", 0, 0);
+            prevIndex += 1;
         }
     }
 }
