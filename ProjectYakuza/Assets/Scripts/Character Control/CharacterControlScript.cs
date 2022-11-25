@@ -37,6 +37,7 @@ public class CharacterControlScript : MonoBehaviour
 
 
     private int groundContactCount = 0;
+    private bool canJump = true;
 
     public bool IsGrounded
     {
@@ -77,12 +78,39 @@ public class CharacterControlScript : MonoBehaviour
             _inputActionFired = _inputActionFired || cinput.Action;
 
         }
+        //Debug.Log(canJump);
         bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
-        if (Input.GetKeyUp(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyUp(KeyCode.Space) && isGrounded && canJump && anim.GetFloat("vely") < 0.05)
         {
-            Debug.Log("space was pressed");
-            rbody.AddForce(new Vector3(0, 300f, 0), ForceMode.Impulse);
+            StartCoroutine(JumpIdle());
         }
+        if (Input.GetKeyUp(KeyCode.Space) && isGrounded && canJump && anim.GetFloat("vely") > 0.05)
+        {
+            StartCoroutine(JumpRunning());
+        }
+    }
+
+    IEnumerator JumpIdle()
+    {
+        canJump = false;
+        anim.SetBool("isJumping", true);
+        yield return new WaitForSeconds(0.5f);
+        rbody.AddForce(new Vector3(0, 300, 0), ForceMode.Impulse);
+        anim.SetBool("isJumping", false);
+        yield return new WaitForSeconds(2.3f);
+        canJump = true;
+    }
+
+    IEnumerator JumpRunning()
+    {
+        Debug.Log("Jump Run");
+        canJump = false;
+        anim.SetBool("isJumping", true);
+        rbody.AddForce(new Vector3(0, 250, 0), ForceMode.Impulse);
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("isJumping", false);
+        yield return new WaitForSeconds(0.7f);
+        canJump = true;
     }
 
 
@@ -99,7 +127,6 @@ public class CharacterControlScript : MonoBehaviour
 
         if (collision.transform.gameObject.tag == "ground")
         {
-
             ++groundContactCount;
         }
 
