@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class MenuAIWalkingScript : MonoBehaviour
 {
+    public int numWaypoints;
     private NavMeshAgent agent;
     public GameObject[] waypoints = new GameObject[13];
     int currWaypoint = -1;

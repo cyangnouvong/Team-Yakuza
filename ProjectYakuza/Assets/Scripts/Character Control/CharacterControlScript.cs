@@ -39,6 +39,8 @@ public class CharacterControlScript : MonoBehaviour
     private int groundContactCount = 0;
     private bool canJump = true;
 
+    public GameObject loseScreen;
+
     public bool IsGrounded
     {
         get
@@ -128,6 +130,11 @@ public class CharacterControlScript : MonoBehaviour
         if (collision.transform.gameObject.tag == "ground")
         {
             ++groundContactCount;
+        }
+
+        if (collision.transform.gameObject.tag == "driving car")
+        {
+            loseScreen.SetActive(true);
         }
 
     }
