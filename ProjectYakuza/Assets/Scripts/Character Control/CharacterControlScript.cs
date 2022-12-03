@@ -15,6 +15,7 @@ public class CharacterControlScript : MonoBehaviour
     private Animator anim;
     private Rigidbody rbody;
     private CharacterInputController cinput;
+    private CharacterStats characterStats;
 
     // new variables added below:
     private float rootMovementSpeed;
@@ -24,6 +25,10 @@ public class CharacterControlScript : MonoBehaviour
     // so must treat input events like discrete button presses as
     // "triggered" until consumed by FixedUpdate()...
     bool _inputActionFired = false;
+
+    bool _inputDrawSword = false;
+
+    bool _inputSheathSword = false;
 
     // ...however constant input measures like axes can just have most recent value
     // cached.
@@ -65,7 +70,18 @@ public class CharacterControlScript : MonoBehaviour
         cinput = GetComponent<CharacterInputController>();
         if (cinput == null)
             Debug.Log("CharacterInput could not be found");
+
+        characterStats = GetComponent<CharacterStats>();
+        if (characterStats == null)
+            Debug.Log("CharacterStats could not be found");
     }
+
+    void Start()
+    {
+        GameManager.Instance.RigisterPlayer(characterStats);
+    }
+
+
 
     private void Update()
     {
@@ -79,6 +95,10 @@ public class CharacterControlScript : MonoBehaviour
             // This makes certain that the action is handled!
             _inputActionFired = _inputActionFired || cinput.Action;
 
+            _inputDrawSword = _inputDrawSword || cinput.DrawSword;
+
+            _inputSheathSword = _inputSheathSword || cinput.SheathSword;
+
         }
         //Debug.Log(canJump);
         bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
@@ -90,6 +110,21 @@ public class CharacterControlScript : MonoBehaviour
         {
             StartCoroutine(JumpRunning());
         }
+
+        if (Input.GetKeyDown("r")) {
+            anim.SetBool("draw", true);
+            anim.SetBool("sneath", false);
+        }
+
+        if (Input.GetKeyDown("f")) {
+            anim.SetBool("sneath", true);
+            anim.SetBool("draw", false);
+        }
+
+        if (Input.GetKeyDown("q")) {
+            anim.SetTrigger("attack");
+        }
+
     }
 
     IEnumerator JumpIdle()
