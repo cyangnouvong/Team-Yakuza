@@ -46,6 +46,8 @@ public class CharacterControlScript : MonoBehaviour
 
     public GameObject loseScreen;
 
+    public AudioSource crashSource;
+
     private bool swordOut = false;
 
     public bool IsGrounded
@@ -76,6 +78,8 @@ public class CharacterControlScript : MonoBehaviour
         characterStats = GetComponent<CharacterStats>();
         if (characterStats == null)
             Debug.Log("CharacterStats could not be found");
+
+        crashSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -172,6 +176,8 @@ public class CharacterControlScript : MonoBehaviour
         if (collision.transform.gameObject.tag == "driving car")
         {
             loseScreen.SetActive(true);
+
+            crashSource.Play();
         }
 
     }
