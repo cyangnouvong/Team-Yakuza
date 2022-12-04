@@ -10,6 +10,7 @@ public class Dialogue : MonoBehaviour
     public string[] lines;
     public float textSpeed;
     public static int index = 0;
+    public static bool playAgain = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,10 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (index == lines.Length && playAgain)
+        {
+            StartDialogue();
+        }
         if (index == 1)
         {
             ThirdPersonCamera.followPlayer = true;
@@ -66,9 +71,8 @@ public class Dialogue : MonoBehaviour
         else
         {
             index++;
-            gameObject.SetActive(false);
             textComponent.text = string.Empty;
-            StartDialogue();
+            gameObject.SetActive(false);
         }
         Debug.Log(index);
     }
