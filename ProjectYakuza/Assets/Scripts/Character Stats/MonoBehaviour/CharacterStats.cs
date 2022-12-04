@@ -26,5 +26,6 @@ public class CharacterStats : MonoBehaviour
     void Start()
     {
         characterData.itemCount = 0;
+        characterData.currentHealth = 100;
     }
 }

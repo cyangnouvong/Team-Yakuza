@@ -11,7 +11,7 @@ public class PlayerHealthUI : MonoBehaviour
     void Awake()
     {
         itemText = transform.GetChild(1).GetComponent<Text>();
-        healthSlider = transform.GetChild(0).GetComponent<Image>();
+        healthSlider = transform.GetChild(0).GetChild(0).GetComponent<Image>();
     }
     void Update()
     {
@@ -21,7 +21,9 @@ public class PlayerHealthUI : MonoBehaviour
 
     void UpdateHealth()
     {
+        // Debug.Log(GameManager.Instance.playerStats.CurrentHealth);
         float sliderPercent = (float)GameManager.Instance.playerStats.CurrentHealth / GameManager.Instance.playerStats.MaxHealth;
+        Debug.Log(sliderPercent + "%");
         healthSlider.fillAmount = sliderPercent;
     }
 
