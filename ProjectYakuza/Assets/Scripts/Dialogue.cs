@@ -30,7 +30,8 @@ public class Dialogue : MonoBehaviour
             if (textComponent.text == lines[index])
             {
                 NextLine();
-            } else
+            } 
+            else
             {
                 StopAllCoroutines();
                 textComponent.text = lines[index];
@@ -61,10 +62,13 @@ public class Dialogue : MonoBehaviour
             index++;
             textComponent.text = string.Empty;
             StartCoroutine(TypeLine());
-        } else
+        } 
+        else
         {
             index++;
             gameObject.SetActive(false);
+            textComponent.text = string.Empty;
+            StartDialogue();
         }
         Debug.Log(index);
     }

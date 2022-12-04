@@ -42,6 +42,18 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
+    public bool DrawSword
+    {
+        get;
+        private set;
+    }
+
+    public bool SheathSword
+    {
+        get;
+        private set;
+    }
+
 
 
     void Update()
@@ -85,7 +97,11 @@ public class CharacterInputController : MonoBehaviour
 
 
         //Capture "fire" button for action event
-        Action = Input.GetButtonDown("Fire1");
+        Action = Input.GetButtonDown("Attack");
+
+        DrawSword = Input.GetButtonDown("DrawSword");
+
+        SheathSword = Input.GetButtonDown("SheathSword");
 
         Jump = Input.GetButtonDown("Jump");
 

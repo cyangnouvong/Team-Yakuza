@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class NPCAIController : MonoBehaviour
 {
+    public Animator anim;
     public NavMeshAgent navMeshAgent;               //  Nav mesh agent component
     public float startWaitTime = 4;                 //  Wait time of every action
     public float timeToRotate = 2;                  //  Wait time when the enemy detect near the player without seeing
@@ -36,6 +37,7 @@ public class NPCAIController : MonoBehaviour
     void Start()
     {
         //Debug.Log("Starting patrol");
+        anim = GetComponent<Animator>();
         m_PlayerPosition = Vector3.zero;
         m_IsPatrol = true;
         m_CaughtPlayer = false;
@@ -79,8 +81,10 @@ public class NPCAIController : MonoBehaviour
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)    //  Control if the enemy arrive to the player location
         {
+            anim.SetBool("close_enough", true);
             if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
             {
+                anim.SetBool("close_enough", false);
                 //  Check if the enemy is not near to the player, returns to patrol after the wait time delay
                 m_IsPatrol = true;
                 m_PlayerNear = false;
@@ -156,6 +160,7 @@ public class NPCAIController : MonoBehaviour
     {
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
+        anim.SetBool("close_enough", false);
     }
 
     void Move(float speed)
@@ -228,7 +233,7 @@ public class NPCAIController : MonoBehaviour
                 /*
                  *  If the enemy no longer sees the player, then the enemy will go to the last position that has been registered
                  * */
-                m_PlayerPosition = player.transform.position;       //  Save the player's current position if the player is in range of vision
+                m_PlayerPosition = player.transform.position + new Vector3(1, 0, 0);       //  Save the player's current position if the player is in range of vision
             }
         }
     }
