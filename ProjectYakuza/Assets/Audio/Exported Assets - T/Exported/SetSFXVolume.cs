@@ -7,21 +7,21 @@ using UnityEngine.UI;
 public class SetSFXVolume : MonoBehaviour
 {
     public AudioMixer mixer;
-    public static float level = 1f;
+    public static float levelsfx = 1f;
     private Slider slider;
-    public static float newSlideValue = 1f;
+    public static float newSlideValuesfx = 1f;
 
     void Start()
     {
         slider = GetComponent<Slider>();
-        mixer.SetFloat("SFXVol", level);
-        slider.value = newSlideValue;
+        mixer.SetFloat("SFXVol", levelsfx);
+        slider.value = newSlideValuesfx;
     }
 
     public void SetLevel(float sliderValue)
     {
-        mixer.SetFloat("SFX", Mathf.Log10(sliderValue) * 20);
-        level = Mathf.Log10(sliderValue) * 20;
-        newSlideValue = sliderValue;
+        mixer.SetFloat("SFXVol", Mathf.Log10(sliderValue) * 20);
+        levelsfx = Mathf.Log10(sliderValue) * 20;
+        newSlideValuesfx = sliderValue;
     }
 }
