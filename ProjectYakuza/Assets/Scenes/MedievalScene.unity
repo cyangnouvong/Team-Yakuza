@@ -15313,6 +15313,7 @@ MonoBehaviour:
   menu: {fileID: 569428567}
   controlScreen: {fileID: 1669636967798261139}
   quitScreen: {fileID: 426551041959365221}
+  optionsScreen: {fileID: 1958616698}
 --- !u!4 &458602941
 Transform:
   m_ObjectHideFlags: 0
