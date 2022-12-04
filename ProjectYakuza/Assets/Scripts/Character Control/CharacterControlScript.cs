@@ -46,6 +46,8 @@ public class CharacterControlScript : MonoBehaviour
 
     public GameObject loseScreen;
 
+    private bool swordOut = false;
+
     public bool IsGrounded
     {
         get
@@ -111,17 +113,17 @@ public class CharacterControlScript : MonoBehaviour
             StartCoroutine(JumpRunning());
         }
 
-        if (Input.GetKeyDown("r")) {
+        if (Input.GetKeyDown(KeyCode.R) && !swordOut && CollectableEquipment.swordCollected) {
             anim.SetBool("draw", true);
             anim.SetBool("sneath", false);
-        }
-
-        if (Input.GetKeyDown("f")) {
+            swordOut = true;
+        } else if (Input.GetKeyDown(KeyCode.R) && swordOut) {
             anim.SetBool("sneath", true);
             anim.SetBool("draw", false);
+            swordOut = false;
         }
-
-        if (Input.GetKeyDown("q")) {
+        
+        if (Input.GetMouseButton(0)) {
             anim.SetTrigger("attack");
         }
 

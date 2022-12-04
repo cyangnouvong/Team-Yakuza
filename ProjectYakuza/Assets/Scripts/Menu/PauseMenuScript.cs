@@ -47,6 +47,11 @@ public class PauseMenuScript : MonoBehaviour
         pause = true;
     }
 
+    public void GoToHome()
+    {
+        SceneManager.LoadScene("StartMenuScene");
+    }
+
     public void ExitGame()
     {
         #if UNITY_EDITOR

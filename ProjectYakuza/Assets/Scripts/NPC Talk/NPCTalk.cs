@@ -11,6 +11,7 @@ public class NPCTalk : MonoBehaviour
     public GameObject interactText;
     public GameObject NPCDialoguePanel;
     public GameObject NPCDialougeText;
+
     void FixedUpdate()
     {
         float NPCDistance = -1.0f;
@@ -19,7 +20,7 @@ public class NPCTalk : MonoBehaviour
             NPCDistance = Vector3.Distance(rbody.transform.position, NPC.transform.position);
         }
 
-        if (NPCDistance != -1 && NPCDistance < 2.0f)
+        if (NPCDistance != -1 && NPCDistance < 3.0f)
         {
             interactText.SetActive(true);
             interactTextBox.SetActive(true);
@@ -32,18 +33,14 @@ public class NPCTalk : MonoBehaviour
 
         if (interactText.activeSelf && Input.GetKey(KeyCode.E))
         {
-            //FadeBlackScript.fade_out = true;
-            //ThirdPersonCamera.followPlayer = false;
-            //StartCoroutine(teleport());
             StartCoroutine(PlayNPCDialogue());
         }
     }
     IEnumerator PlayNPCDialogue()
     {
+        Dialogue.playAgain = true;
         NPCDialoguePanel.SetActive(true);
         NPCDialougeText.SetActive(true);
         yield return new WaitForSeconds(6f);
-        //interactText.SetActive(false);
-        //interactTextBox.SetActive(false);
     }
 }
