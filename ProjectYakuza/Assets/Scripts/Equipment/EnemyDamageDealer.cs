@@ -9,10 +9,12 @@ public class EnemyDamageDealer : MonoBehaviour
  
     [SerializeField] float weaponLength;
     [SerializeField] float weaponDamage;
+
     void Start()
     {
         canDealDamage = false;
         hasDealtDamage = false;
+        //audioSource = GetComponent<AudioSource>();
     }
  
     // Update is called once per frame
@@ -28,6 +30,8 @@ public class EnemyDamageDealer : MonoBehaviour
                 if (hit.transform.TryGetComponent(out HealthSystem health))
                 {
                     Debug.Log("Player Take Damage");
+                    //audioSource.PlayOneShot(audioSource.clip, 1F);
+                    //AudioSource.PlayClipAtPoint(damageSound, transform.position);
                     health.TakeDamage(weaponDamage);
                     // health.HitVFX(hit.point);
                     hasDealtDamage = true;
