@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
- 
+using UnityEngine.Audio;
+
 public class Enemy : MonoBehaviour
 {
     [SerializeField] float health = 3;
@@ -19,7 +20,10 @@ public class Enemy : MonoBehaviour
     Animator animator;
     float timePassed;
     float newDestinationCD = 0.5f;
- 
+
+    public AudioClip deathSound;
+    public AudioClip damageSound;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -68,6 +72,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         // Instantiate(ragdoll, transform.position,transform.rotation);
+        AudioSource.PlayClipAtPoint(deathSound, transform.position);
         Destroy(this.gameObject);
     }
  
@@ -75,8 +80,13 @@ public class Enemy : MonoBehaviour
     {
         health -= damageAmount;
         animator.SetTrigger("damage");
+        if (damageAmount > 0)
+        {
+            // play damage audio
+            AudioSource.PlayClipAtPoint(damageSound, transform.position);
+        }
         //CameraShake.Instance.ShakeCamera(2f, 0.2f);
- 
+
         if (health <= 0)
         {
             Die();
