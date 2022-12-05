@@ -11,6 +11,7 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject menu;
     public GameObject controlScreen;
     public GameObject quitScreen;
+    public GameObject optionsScreen;
     public static bool pause = false;
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class PauseMenuScript : MonoBehaviour
                 menu.SetActive(false);
                 controlScreen.SetActive(false);
                 quitScreen.SetActive(false);
+                optionsScreen.SetActive(false);
                 Time.timeScale = 1;
                 pause = false;
             }

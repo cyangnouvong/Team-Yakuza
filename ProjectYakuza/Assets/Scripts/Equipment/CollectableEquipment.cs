@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CollectableEquipment : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class CollectableEquipment : MonoBehaviour
 
     public GameObject NPCDialoguePanel;
     public GameObject NPCDialougeText;
+
+    public AudioClip collectionSound;
+
+    
 
     void OnTriggerEnter(Collider c)
     {
@@ -27,7 +32,9 @@ public class CollectableEquipment : MonoBehaviour
                     NPCDialougeText.SetActive(true);
                 }
 
+                AudioSource.PlayClipAtPoint(collectionSound, transform.position);
                 Destroy(this.gameObject);
+                
             }
         }
     }
